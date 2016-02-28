@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MGF</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="js/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="js/vendor/bootstrap/css/bootstrap-theme.min.css">
+    <script src="js/vendor/jquery-2.2.1.min.js"></script>
+    <script src="js/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/vendor/lodash.core.min.js"></script>
+    <script src="js/main.js"></script>
+
+</head>
+<body onload="init();">
+<div class="site-wrapper">
+    <noscript>Yep, you need javascript to play the game</noscript>
+    <div class="container" id="game">
+        <div class="tabbed carousel slide" id="screens" data-ride="carousel">
+<!--            <ol class="carousel-indicators">
+                <li data-target="#screens" data-slide-to="0" class="active">Stock</li>
+                <li data-target="#screens" data-slide-to="1">Labor</li>
+            </ol>-->
+            <!--<div class="carousel-inner" role="listbox">-->
+            <div class="row">
+                <button class="col-md-3 btn btn-default active">Resources</button>
+                <button class="col-md-3 btn btn-default">Labor</button>
+                <div class="col-md-6"></div>
+            </div>
+                <div id="stock" class="item active">
+                    <table class="table">
+                        <caption>Stocks</caption>
+                        <tr class="row">
+                            <th scope="row" class="col-md-3">Herbs:</th>
+                            <td class="col-md-9" id="herb">20</td>
+                        </tr>
+                        <tr class="row">
+                            <th scope="row" class="col-md-3">Roots:</th>
+                            <td class="col-md-9" id="herb">20</td>
+                        </tr>
+                        <tr class="row">
+                            <th scope="row" class="col-md-3">Nuts:</th>
+                            <td class="col-md-9" id="herb">20</td>
+                        </tr>
+                        <tr class="row">
+                            <th scope="row" class="col-md-3">Fruits:</th>
+                            <td class="col-md-9" id="herb">20</td>
+                        </tr>
+                        <tr class="row">
+                            <th scope="row" class="col-md-3">Grains:</th>
+                            <td class="col-md-9" id="herb">20</td>
+                        </tr>
+                        <tr class="row">
+                            <th scope="row" class="col-md-3">Cut stone:</th>
+                            <td class="col-md-9" id="herb">20</td>
+                        </tr>
+                        <tr class="row">
+                            <th scope="row" class="col-md-3">Meat:</th>
+                            <td class="col-md-9" id="herb">20</td>
+                        </tr>
+                        <tr class="row">
+                            <th scope="row" class="col-md-3">Iron:</th>
+                            <td class="col-md-9" id="herb">20</td>
+                        </tr>
+                        <tr class="row">
+                            <th scope="row" class="col-md-3">Coal:</th>
+                            <td class="col-md-9" id="herb">20</td>
+                        </tr>
+                        <tr class="row">
+                            <th scope="row" class="col-md-3">Steel:</th>
+                            <td class="col-md-9" id="herb">20</td>
+                        </tr>
+                        <tr class="row">
+                            <th scope="row" class="col-md-3">Leather:</th>
+                            <td class="col-md-9" id="herb">20</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+                <div id="population" class="item">
+                    <h3 id="race-name">Buffalo</h3>
+                    <table id="labor" class="table">
+                        <caption>Labor allocation</caption>
+                        <tr id="workerTotal" class="row">
+                            <th scope="row" class="col-md-3">Total Number of workers:</th>
+                            <td class="col-md-9">20</td>
+                        </tr>
+                        <tr id="workerIdle" class="row">
+                            <th scope="row" class="col-md-3">Idle workers:</th>
+                            <td class="col-md-9">20</td>
+                        </tr>
+                        <tr id="builder" class="row">
+                            <th scope="row" class="col-md-3"><label for="lb">Builders:</label></th>
+                            <td class="col-md-9"><input id="lb" type="number" value="0" min="0"></td>
+                        </tr>
+                        <tr id="gatherer" class="row">
+                            <th scope="row" class="col-md-3"><label for="lg">Gatherers:</label></th>
+                            <td class="col-md-9"><input id="lg" type="number" value="0" min="0"></td>
+                        </tr>
+                        <tr id="scientist" class="row">
+                            <th scope="row" class="col-md-3"><label for="ls">Scientists:</label></th>
+                            <td class="col-md-9"><input id="ls" type="number" value="0" min="0"></td>
+                        </tr>
+                        <tr id="miner" class="row">
+                            <th scope="row" class="col-md-3"><label for="lm">Miners:</label></th>
+                            <td class="col-md-9"><input id="lm" type="number" value="0" min="0"></td>
+                        </tr>
+                        <tr id="hunter" class="row">
+                            <th scope="row" class="col-md-3"><label for="lh">Hunters:</label></th>
+                            <td class="col-md-9"><input id="lh" type="number" value="0" min="0"></td>
+                        </tr>
+                        <tr id="guard" class="row">
+                            <th scope="row" class="col-md-3"><label for="lgu">Guards:</label></th>
+                            <td class="col-md-9"><input id="lgu" type="number" value="0" min="0"></td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        <!--</div>-->
+        <div class="navbar navbar-fixed-bottom">
+            <button onclick="resetGame();" id="reset" class="btn btn-danger">Reset game</button>
+        </div>
+    </div>
+    <div class="fullscreen container-fluid" id="dialog_screen">
+        <div id="dialog_bottom_panel"></div>
+        <div id="character1"></div>
+        <div id="character2"></div>
+        <div id="character3"></div>
+        <div id="character4"></div>
+        <div id="character5"></div>
+        <div id="character6"></div>
+        <button id="next" class="btn btn-primary">&gt;&gt;&gt;</button>
+    </div>
+</div>
+</body>
+</html>
