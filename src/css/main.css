@@ -31,3 +31,15 @@ div.navbar.navbar-fixed-bottom {
 #reset {
     margin-top: 3px;
 }
+
+.sighted-invisible {
+    opacity: 0;
+}
+
+.top-btn {
+    margin-top: 2em;
+}
+
+.reset-btn {
+    float: right;
+}

@@ -23,9 +23,10 @@
                 <button class="col-md-3 btn btn-default" onclick="changeTab('population');" id="btn-population">Labor</button>
                 <div class="col-md-6"></div>
             </div>
+            <button class="btn-primary btn top-btn" onclick="nextWeek();">Next season</button>
                 <div id="stock">
                     <table class="table">
-                        <caption>Stocks</caption>
+                        <caption class="sighted-invisible">Stocks report</caption>
                         <tr class="row">
                             <th scope="row" class="col-md-3">Herbs:</th>
                             <td class="col-md-9" id="herb">20</td>
@@ -65,7 +66,7 @@
                 <div id="population" class="item" style="display: none">
                     <h3 id="race-name">Buffalo</h3>
                     <table id="labor" class="table">
-                        <caption>Labor allocation</caption>
+                        <caption class="sighted-invisible">Labor allocation</caption>
                         <tr id="workerTotal" class="row">
                             <th scope="row" class="col-md-3">Total Number of workers:</th>
                             <td class="col-md-9">20</td>
@@ -101,11 +102,9 @@
                     </table>
 
                 </div>
-                <button class="btn-primary btn" onclick="nextWeek();">Next week</button>
             </div>
-        <!--</div>-->
         <div class="navbar navbar-fixed-bottom">
-            <button onclick="resetGame();" id="reset" class="btn btn-danger">Reset game</button>
+            <button onclick="resetGame();" class="btn btn-danger reset-btn">Reset game</button>
         </div>
     </div>
     <div class="fullscreen container-fluid" id="dialog_screen">
