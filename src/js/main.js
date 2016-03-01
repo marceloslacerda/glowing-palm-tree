@@ -12,7 +12,16 @@ function Game() {
         guard: 0,
         miner: 0
     };
-    this.stocks = {};
+    this.stocks = {
+        herb: 3,
+        food: 5,
+        stone: 2,
+        iron: 0,
+        coal: 0,
+        leather: 0,
+        steel: 0,
+        wood: 5
+    };
     this.activeTab = "stock";
 }
 
@@ -23,6 +32,14 @@ function UI() {
     };
     this.jobs = {};
 }
+
+var triggers = {
+    'gameOver' : function (g) {
+        if(g.stocks.food <= 0) {
+            console.log("Game over");
+        }
+    }
+};
 
 /*function Control(game, tag, min, max) {
 
@@ -72,12 +89,14 @@ function setLaborChangeEvent(game, ui, property) {
 }
 
 function save(game) {
+    console.log('Saving game:', game);
     localStorage["game"] = JSON.stringify(game);
 }
 
 function loadOrCreate() {
     var game = localStorage["game"];
     if (game) return JSON.parse(game);
+    console.log(game);
     return new Game();
 }
 
@@ -106,6 +125,24 @@ function changeTab(tabId) {
     }
 }
 
+function calcUpkeep(game) {
+    return {'food': 5, 'herb': 1, 'wood': 1}
+}
+
+function updateStock(game, ui) {
+    _.forEach(game.stocks, function (v, k) {
+        $("#" + k).text(game.stocks[k]);
+    });
+}
+
+function nextWeek() {
+    var upkeep = calcUpkeep(g);
+    _.forEach(upkeep, function (v, k) {
+        g.stocks[k] -= v;
+    });
+    updateStock(g, ui);
+}
+
 function init() {
     console.log("Game initialized");
     g = loadOrCreate();
@@ -115,4 +152,5 @@ function init() {
     setAllLabor(game, ui);
     setLaborChangeEvent(game, ui, "builder");
     setLaborControl(game, ui, "builder");
+    updateStock(game, ui);
 }
