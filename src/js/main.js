@@ -33,14 +33,6 @@ function UI() {
     this.jobs = {};
 }
 
-var triggers = {
-    'gameOver' : function (g) {
-        if(g.stocks.food <= 0) {
-            console.log("Game over");
-        }
-    }
-};
-
 /*function Control(game, tag, min, max) {
 
  }*/
@@ -136,9 +128,13 @@ function updateStock(game, ui) {
 }
 
 function nextWeek() {
+    console.log("Another season.");
     var upkeep = calcUpkeep(g);
     _.forEach(upkeep, function (v, k) {
         g.stocks[k] -= v;
+    });
+    _.forEach(triggers, function (f) {
+        f(g);
     });
     updateStock(g, ui);
 }
