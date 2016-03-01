@@ -31,13 +31,3 @@ div.navbar.navbar-fixed-bottom {
 #reset {
     margin-top: 3px;
 }
-
-ol.carousel-indicators li {
-    color:black;
-    background-color: #0f0f0f;
-}
-
-ol.carousel-indicators li.active{
-    color:black;
-    background-color: #0f0f0f;
-}

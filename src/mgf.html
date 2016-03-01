@@ -17,18 +17,13 @@
 <div class="site-wrapper">
     <noscript>Yep, you need javascript to play the game</noscript>
     <div class="container" id="game">
-        <div class="tabbed carousel slide" id="screens" data-ride="carousel">
-<!--            <ol class="carousel-indicators">
-                <li data-target="#screens" data-slide-to="0" class="active">Stock</li>
-                <li data-target="#screens" data-slide-to="1">Labor</li>
-            </ol>-->
-            <!--<div class="carousel-inner" role="listbox">-->
+        <div id="screens" >
             <div class="row">
-                <button class="col-md-3 btn btn-default active">Resources</button>
-                <button class="col-md-3 btn btn-default">Labor</button>
+                <button class="col-md-3 btn btn-default active" onclick="changeTab('stock');" id="btn-stock">Resources</button>
+                <button class="col-md-3 btn btn-default" onclick="changeTab('population');" id="btn-population">Labor</button>
                 <div class="col-md-6"></div>
             </div>
-                <div id="stock" class="item active">
+                <div id="stock">
                     <table class="table">
                         <caption>Stocks</caption>
                         <tr class="row">
@@ -37,49 +32,49 @@
                         </tr>
                         <tr class="row">
                             <th scope="row" class="col-md-3">Roots:</th>
-                            <td class="col-md-9" id="herb">20</td>
+                            <td class="col-md-9" id="root">20</td>
                         </tr>
                         <tr class="row">
                             <th scope="row" class="col-md-3">Nuts:</th>
-                            <td class="col-md-9" id="herb">20</td>
+                            <td class="col-md-9" id="nut">20</td>
                         </tr>
                         <tr class="row">
                             <th scope="row" class="col-md-3">Fruits:</th>
-                            <td class="col-md-9" id="herb">20</td>
+                            <td class="col-md-9" id="fruit">20</td>
                         </tr>
                         <tr class="row">
                             <th scope="row" class="col-md-3">Grains:</th>
-                            <td class="col-md-9" id="herb">20</td>
+                            <td class="col-md-9" id="grain">20</td>
                         </tr>
                         <tr class="row">
                             <th scope="row" class="col-md-3">Cut stone:</th>
-                            <td class="col-md-9" id="herb">20</td>
+                            <td class="col-md-9" id="stone">20</td>
                         </tr>
                         <tr class="row">
                             <th scope="row" class="col-md-3">Meat:</th>
-                            <td class="col-md-9" id="herb">20</td>
+                            <td class="col-md-9" id="meat">20</td>
                         </tr>
                         <tr class="row">
                             <th scope="row" class="col-md-3">Iron:</th>
-                            <td class="col-md-9" id="herb">20</td>
+                            <td class="col-md-9" id="iron">20</td>
                         </tr>
                         <tr class="row">
                             <th scope="row" class="col-md-3">Coal:</th>
-                            <td class="col-md-9" id="herb">20</td>
+                            <td class="col-md-9" id="coal">20</td>
                         </tr>
                         <tr class="row">
                             <th scope="row" class="col-md-3">Steel:</th>
-                            <td class="col-md-9" id="herb">20</td>
+                            <td class="col-md-9" id="steel">20</td>
                         </tr>
                         <tr class="row">
                             <th scope="row" class="col-md-3">Leather:</th>
-                            <td class="col-md-9" id="herb">20</td>
+                            <td class="col-md-9" id="leather">20</td>
                         </tr>
 
                     </table>
 
                 </div>
-                <div id="population" class="item">
+                <div id="population" class="item" style="display: none">
                     <h3 id="race-name">Buffalo</h3>
                     <table id="labor" class="table">
                         <caption>Labor allocation</caption>

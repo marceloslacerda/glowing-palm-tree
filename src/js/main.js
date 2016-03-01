@@ -13,6 +13,7 @@ function Game() {
         miner: 0
     };
     this.stocks = {};
+    this.activeTab = "stock";
 }
 
 function UI() {
@@ -93,12 +94,23 @@ function setAllLabor(game, ui) {
     });
 }
 
+function changeTab(tabId) {
+    console.log(tabId, g.activeTab);
+    if (tabId != g.activeTab) {
+        $("#btn-" + tabId).toggleClass("active");
+        $("#btn-" + g.activeTab).toggleClass("active");
+        $("#" + g.activeTab).fadeOut(400, function () {
+            $("#" + tabId).fadeIn();
+        });
+        g.activeTab = tabId;
+    }
+}
+
 function init() {
     console.log("Game initialized");
     g = loadOrCreate();
     ui = new UI();
     var game = g;
-    setTabsControl(game, ui);
     setAllLabels(game, ui);
     setAllLabor(game, ui);
     setLaborChangeEvent(game, ui, "builder");
