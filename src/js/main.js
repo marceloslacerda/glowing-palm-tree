@@ -7,7 +7,6 @@ function Game() {
     this.jobs = {
         builder: 0,
         gatherer: 0,
-        hunter: 0,
         scientist: 0,
         guard: 0,
         miner: 0
@@ -127,7 +126,11 @@ function changeTab(tabId) {
 }
 
 function calcUpkeep(game) {
-    return {'food': 5, 'herb': 1, 'wood': 1}
+    return {
+        'food': game.workerTotal,
+        'herb': game.workerTotal / 5,
+        'wood': game.workerTotal / 5
+    }
 }
 
 function updateStock(game, ui) {
@@ -136,11 +139,23 @@ function updateStock(game, ui) {
     });
 }
 
+function calcYield(game) {
+    var total = {};
+    _.forEach(laborYield, function (itemList, jobName) {
+        var mult = game.jobs[jobName];
+        _.forEach(itemList, function (baseValue, itemName) {
+            total[itemName] = (total[itemName] | 0) + baseValue * mult;
+        });
+    });
+    return total;
+}
+
 function nextWeek() {
     console.log("Another season.");
     var upkeep = calcUpkeep(g);
+    var yield_ = calcYield(g);
     _.forEach(upkeep, function (v, k) {
-        g.stocks[k] -= v;
+        g.stocks[k] += -v + (yield_[k] | 0);
     });
     _.forEach(triggers, function (f) {
         f(g);
