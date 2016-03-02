@@ -18,97 +18,103 @@
 <div class="site-wrapper">
     <noscript>Yep, you need javascript to play the game</noscript>
     <div class="container" id="game">
-        <div id="screens" >
+        <div id="screens">
             <div class="row">
-                <button class="col-md-3 btn btn-default active" onclick="changeTab('stock');" id="btn-stock">Resources</button>
-                <button class="col-md-3 btn btn-default" onclick="changeTab('population');" id="btn-population">Labor</button>
+                <button class="col-md-3 btn btn-default active" onclick="changeTab('stock');" id="btn-stock">Resources
+                </button>
+                <button class="col-md-3 btn btn-default" onclick="changeTab('population');" id="btn-population">Labor
+                </button>
                 <div class="col-md-6"></div>
             </div>
             <button class="btn-primary btn top-btn" onclick="nextWeek();">Next season</button>
-                <div id="stock">
-                    <table class="table">
-                        <caption class="sighted-invisible">Stocks report</caption>
-                        <tr class="row">
-                            <th scope="row" class="col-md-3">Herbs:</th>
-                            <td class="col-md-9" id="herb">20</td>
-                        </tr>
-                        <tr class="row">
-                            <th scope="row" class="col-md-3">Food:</th>
-                            <td class="col-md-9" id="food">20</td>
-                        </tr>
-                        <tr class="row">
-                            <th scope="row" class="col-md-3">Cut stone:</th>
-                            <td class="col-md-9" id="stone">20</td>
-                        </tr>
-                        <tr class="row">
-                            <th scope="row" class="col-md-3">Cut wood:</th>
-                            <td class="col-md-9" id="wood">20</td>
-                        </tr>
-                        <tr class="row">
-                            <th scope="row" class="col-md-3">Iron:</th>
-                            <td class="col-md-9" id="iron">20</td>
-                        </tr>
-                        <tr class="row">
-                            <th scope="row" class="col-md-3">Coal:</th>
-                            <td class="col-md-9" id="coal">20</td>
-                        </tr>
-                        <tr class="row">
-                            <th scope="row" class="col-md-3">Steel:</th>
-                            <td class="col-md-9" id="steel">20</td>
-                        </tr>
-                        <tr class="row">
-                            <th scope="row" class="col-md-3">Leather:</th>
-                            <td class="col-md-9" id="leather">20</td>
-                        </tr>
+            <div id="stock">
+                <table class="table">
+                    <caption class="sighted-invisible">Stocks report</caption>
+                    <tr class="row">
+                        <th scope="row" class="col-md-3">Herbs:</th>
+                        <td class="col-md-9" id="herb">20</td>
+                    </tr>
+                    <tr class="row">
+                        <th scope="row" class="col-md-3">Food:</th>
+                        <td class="col-md-9" id="food">20</td>
+                    </tr>
+                    <tr class="row">
+                        <th scope="row" class="col-md-3">Cut stone:</th>
+                        <td class="col-md-9" id="stone">20</td>
+                    </tr>
+                    <tr class="row">
+                        <th scope="row" class="col-md-3">Cut wood:</th>
+                        <td class="col-md-9" id="wood">20</td>
+                    </tr>
+                    <tr class="row">
+                        <th scope="row" class="col-md-3">Iron:</th>
+                        <td class="col-md-9" id="iron">20</td>
+                    </tr>
+                    <tr class="row">
+                        <th scope="row" class="col-md-3">Coal:</th>
+                        <td class="col-md-9" id="coal">20</td>
+                    </tr>
+                    <tr class="row">
+                        <th scope="row" class="col-md-3">Steel:</th>
+                        <td class="col-md-9" id="steel">20</td>
+                    </tr>
+                    <tr class="row">
+                        <th scope="row" class="col-md-3">Leather:</th>
+                        <td class="col-md-9" id="leather">20</td>
+                    </tr>
 
-                    </table>
+                </table>
 
-                </div>
-                <div id="population" class="item" style="display: none">
-                    <h3 id="race-name">Buffalo</h3>
-                    <table id="labor" class="table">
-                        <caption class="sighted-invisible">Labor allocation</caption>
-                        <tr id="workerTotal" class="row">
-                            <th scope="row" class="col-md-3">Total Number of workers:</th>
-                            <td class="col-md-9">20</td>
-                        </tr>
-                        <tr id="workerIdle" class="row">
-                            <th scope="row" class="col-md-3">Idle workers:</th>
-                            <td class="col-md-9">20</td>
-                        </tr>
-                        <tr id="builder" class="row">
-                            <th scope="row" class="col-md-3"><label for="lb">Builders:</label></th>
-                            <td class="col-md-9"><input id="lb" type="number" value="0" min="0"></td>
-                        </tr>
-                        <tr id="gatherer" class="row">
-                            <th scope="row" class="col-md-3"><label for="lg">Gatherers:</label></th>
-                            <td class="col-md-9"><input id="lg" type="number" value="0" min="0"></td>
-                        </tr>
-                        <tr id="scientist" class="row">
-                            <th scope="row" class="col-md-3"><label for="ls">Scientists:</label></th>
-                            <td class="col-md-9"><input id="ls" type="number" value="0" min="0"></td>
-                        </tr>
-                        <tr id="miner" class="row">
-                            <th scope="row" class="col-md-3"><label for="lm">Miners:</label></th>
-                            <td class="col-md-9"><input id="lm" type="number" value="0" min="0"></td>
-                        </tr>
-                        <tr id="hunter" class="row">
-                            <th scope="row" class="col-md-3"><label for="lh">Hunters:</label></th>
-                            <td class="col-md-9"><input id="lh" type="number" value="0" min="0"></td>
-                        </tr>
-                        <tr id="guard" class="row">
-                            <th scope="row" class="col-md-3"><label for="lgu">Guards:</label></th>
-                            <td class="col-md-9"><input id="lgu" type="number" value="0" min="0"></td>
-                        </tr>
-                    </table>
-
-                </div>
             </div>
+            <div id="population" class="item" style="display: none">
+                <h3 id="race-name">Buffalo</h3>
+                <table id="labor" class="table">
+                    <caption class="sighted-invisible">Labor allocation</caption>
+                    <tr id="workerTotal" class="row">
+                        <th scope="row" class="col-md-3">Total Number of workers:</th>
+                        <td class="col-md-9">20</td>
+                    </tr>
+                    <tr id="workerIdle" class="row">
+                        <th scope="row" class="col-md-3">Idle workers:</th>
+                        <td class="col-md-9">20</td>
+                    </tr>
+                    <tr id="builder" class="row">
+                        <th scope="row" class="col-md-3"><label for="lb">Builders:</label></th>
+                        <td class="col-md-9"><input id="lb" type="number" value="0" min="0"></td>
+                    </tr>
+                    <tr id="gatherer" class="row">
+                        <th scope="row" class="col-md-3"><label for="lg">Gatherers:</label></th>
+                        <td class="col-md-9"><input id="lg" type="number" value="0" min="0"></td>
+                    </tr>
+                    <tr id="scientist" class="row">
+                        <th scope="row" class="col-md-3"><label for="ls">Scientists:</label></th>
+                        <td class="col-md-9"><input id="ls" type="number" value="0" min="0"></td>
+                    </tr>
+                    <tr id="miner" class="row">
+                        <th scope="row" class="col-md-3"><label for="lm">Miners:</label></th>
+                        <td class="col-md-9"><input id="lm" type="number" value="0" min="0"></td>
+                    </tr>
+                    <tr id="hunter" class="row">
+                        <th scope="row" class="col-md-3"><label for="lh">Hunters:</label></th>
+                        <td class="col-md-9"><input id="lh" type="number" value="0" min="0"></td>
+                    </tr>
+                    <tr id="guard" class="row">
+                        <th scope="row" class="col-md-3"><label for="lgu">Guards:</label></th>
+                        <td class="col-md-9"><input id="lgu" type="number" value="0" min="0"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <div class="navbar navbar-fixed-bottom">
             <button onclick="resetGame();" class="btn btn-danger reset-btn">Reset game</button>
         </div>
     </div>
-    <div class="fullscreen container-fluid" id="dialog_screen">
+    <div id="dialog_screen">
+        <div class="text-center">
+            <h1 class="game-over-text">GAME OVER</h1>
+            <h2 id="cause-of-death">Your population died of famine!</h2>
+            <button class="btn btn-success btn-restart">Try again</button>
+        </div>
         <div id="dialog_bottom_panel"></div>
         <div id="character1"></div>
         <div id="character2"></div>
