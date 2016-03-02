@@ -93,7 +93,16 @@ function loadOrCreate() {
 }
 
 function resetGame() {
+    console.log("Resetting game");
     delete localStorage["game"];
+    var $site = $(".site-wrapper");
+    $site.fadeOut(400, function () {
+        $("#game").removeClass("game-over");
+        $(".navbar.navbar-fixed-bottom").show();
+        $("#dialog_screen").hide();
+        $site.fadeIn();
+        init();
+    });
 }
 
 function setAllLabor(game, ui) {
