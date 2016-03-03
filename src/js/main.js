@@ -151,7 +151,7 @@ function calcYield(game) {
     return total;
 }
 
-function nextWeek() {
+function nextSeason() {
     console.log("Another season.");
     console.log("Old stock", g.stocks);
     var upkeep = calcUpkeep(g);
