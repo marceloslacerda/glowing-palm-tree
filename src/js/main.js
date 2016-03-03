@@ -22,7 +22,6 @@ function Game() {
         steel: 0,
         wood: 5
     };
-    this.activeTab = "stock";
 }
 
 function UI() {
@@ -31,6 +30,7 @@ function UI() {
         workerIdle: $("#workerIdle > :nth-child(2)")
     };
     this.jobs = {};
+    this.activeTab = "stock";
 }
 
 /*function Control(game, tag, min, max) {
@@ -96,6 +96,7 @@ function resetGame() {
     console.log("Resetting game");
     delete localStorage["game"];
     var $site = $(".site-wrapper");
+    changeTab("stock");
     $site.fadeOut(400, function () {
         $("#game").removeClass("game-over");
         $(".navbar.navbar-fixed-bottom").show();
@@ -115,14 +116,14 @@ function setAllLabor(game, ui) {
 }
 
 function changeTab(tabId) {
-    console.log(tabId, g.activeTab);
-    if (tabId != g.activeTab) {
+    console.log(tabId, ui.activeTab);
+    if (tabId != ui.activeTab) {
         $("#btn-" + tabId).toggleClass("active");
-        $("#btn-" + g.activeTab).toggleClass("active");
-        $("#" + g.activeTab).fadeOut(400, function () {
+        $("#btn-" + ui.activeTab).toggleClass("active");
+        $("#" + ui.activeTab).fadeOut(400, function () {
             $("#" + tabId).fadeIn();
         });
-        g.activeTab = tabId;
+        ui.activeTab = tabId;
     }
 }
 
@@ -171,6 +172,7 @@ function nextSeason() {
     });
     console.log('New Stock', g.stocks);
     updateStock(g, ui);
+    changeTab("stock");
 }
 
 function init() {
