@@ -11,5 +11,8 @@ var laborYield = {
         'stone': 1,
         'iron': 0.1,
         'coal': 0.2
+    },
+    'lumberjack': {
+        'wood': 3
     }
 };

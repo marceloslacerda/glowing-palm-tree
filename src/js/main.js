@@ -9,6 +9,7 @@ function Game() {
         gatherer: 0,
         scientist: 0,
         guard: 0,
+        lumberjack: 0,
         miner: 0
     };
     this.stocks = {
@@ -135,16 +136,16 @@ function calcUpkeep(game) {
 
 function updateStock(game, ui) {
     _.forEach(game.stocks, function (v, k) {
-        $("#" + k).text(game.stocks[k]);
+        $("#" + k).text(game.stocks[k].toFixed(2));
     });
 }
 
 function calcYield(game) {
     var total = {};
     _.forEach(laborYield, function (itemList, jobName) {
-        var mult = game.jobs[jobName];
+        var workers = game.jobs[jobName];
         _.forEach(itemList, function (baseValue, itemName) {
-            total[itemName] = (total[itemName] | 0) + baseValue * mult;
+            total[itemName] = (total[itemName] | 0) + baseValue * workers;
         });
     });
     return total;
@@ -152,14 +153,23 @@ function calcYield(game) {
 
 function nextWeek() {
     console.log("Another season.");
+    console.log("Old stock", g.stocks);
     var upkeep = calcUpkeep(g);
+    console.log('Total upkeep', upkeep);
     var yield_ = calcYield(g);
-    _.forEach(upkeep, function (v, k) {
-        g.stocks[k] += -v + (yield_[k] | 0);
+    console.log('Total yield', yield_);
+    function getStock(object, item) {
+        return object[item] != undefined ? object[item] : 0;
+    }
+
+    _.forEach(g.stocks, function (oldTotal, item, stocks) {
+        console.log(item, oldTotal, getStock(upkeep, item), getStock(yield_, item));
+        stocks[item] = oldTotal - getStock(upkeep, item) + getStock(yield_, item);
     });
     _.forEach(triggers, function (f) {
         f(g);
     });
+    console.log('New Stock', g.stocks);
     updateStock(g, ui);
 }
 
