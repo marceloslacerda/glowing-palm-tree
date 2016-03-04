@@ -28,45 +28,18 @@
                 <div class="col-md-6"></div>
             </div>
             <button class="btn-primary btn top-btn" onclick="nextSeason();">Next season</button>
-            <div id="stock">
-                <table class="table">
-                    <caption class="sighted-invisible">Stocks report</caption>
-                    <tr class="row">
-                        <th scope="row" class="col-md-3">Herbs:</th>
-                        <td class="col-md-9" id="herb">20</td>
-                    </tr>
-                    <tr class="row">
-                        <th scope="row" class="col-md-3">Food:</th>
-                        <td class="col-md-9" id="food">20</td>
-                    </tr>
-                    <tr class="row">
-                        <th scope="row" class="col-md-3">Cut stone:</th>
-                        <td class="col-md-9" id="stone">20</td>
-                    </tr>
-                    <tr class="row">
-                        <th scope="row" class="col-md-3">Cut wood:</th>
-                        <td class="col-md-9" id="wood">20</td>
-                    </tr>
-                    <tr class="row">
-                        <th scope="row" class="col-md-3">Iron:</th>
-                        <td class="col-md-9" id="iron">20</td>
-                    </tr>
-                    <tr class="row">
-                        <th scope="row" class="col-md-3">Coal:</th>
-                        <td class="col-md-9" id="coal">20</td>
-                    </tr>
-                    <tr class="row">
-                        <th scope="row" class="col-md-3">Steel:</th>
-                        <td class="col-md-9" id="steel">20</td>
-                    </tr>
-                    <tr class="row">
-                        <th scope="row" class="col-md-3">Leather:</th>
-                        <td class="col-md-9" id="leather">20</td>
-                    </tr>
+            <table class="table" id="stock">
+                <caption class="sighted-invisible">Stocks report</caption>
+                <thead>
+                <tr class="row">
+                    <th class="col-md-3"></th>
+                    <th scope="row" class="col-md-3">Total</th>
+                    <th scope="row" class="col-md-3">Previous yield</th>
+                    <th scope="row" class="col-md-3">Previous upkeep</th>
+                </tr>
+                </thead>
 
-                </table>
-
-            </div>
+            </table>
             <div id="population" class="item" style="display: none">
                 <h3 id="race-name">Buffalo</h3>
                 <table id="labor" class="table">

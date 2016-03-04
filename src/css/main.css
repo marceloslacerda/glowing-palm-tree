@@ -93,3 +93,18 @@ div.navbar.navbar-fixed-bottom {
 .btn-restart {
     margin-top: 3em;
 }
+
+th {
+    text-transform: capitalize;
+}
+
+.total {
+}
+
+.yield {
+    color: green;
+}
+
+.upkeep {
+    color: red;
+}
