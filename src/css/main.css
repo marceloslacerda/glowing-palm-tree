@@ -108,3 +108,7 @@ th {
 .upkeep {
     color: red;
 }
+
+.season-header {
+    text-transform: capitalize;
+}

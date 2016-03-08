@@ -1,6 +1,7 @@
 var g = undefined;
 var ui = undefined;
 const COLUMN_SIZING = "col-md-3";
+const SEASONS = ["spring", "summer", "autumn", "winter"];
 
 function Game() {
     this.workerTotal = 20;
@@ -24,6 +25,7 @@ function Game() {
         wood: 5
     };
     this.firstSeason = true;
+    this.season = 2;
 }
 
 function UI(game) {
@@ -34,13 +36,14 @@ function UI(game) {
     this.jobs = {};
     this.activeTab = "stock";
     this.stocks = {};
+    this.seasonHeader = $(".season-header");
     var parent = this;
 
     this.init = function () {
         _.forEach(game.jobs, function (v, job) {
             console.log(job);
             parent.jobs[job] = $("#" + job + " * input");
-            parent.setLaborChangeEvent(game, job);
+            parent.setLaborChangeEvent(job);
         });
 
         _.forEach(game.stocks, function (v, item) {
@@ -80,6 +83,7 @@ function UI(game) {
         _.forEach(parent.labels, function (v, k) {
             parent.setLabel(game, k);
         });
+        ui.seasonHeader.text(SEASONS[g.season]);
     };
 
     this.setLabel = function (game, property) {
@@ -107,23 +111,23 @@ function UI(game) {
         });
     };
 
-    this.setLaborChangeEvent = function (game, property) {
+    this.setLaborChangeEvent = function (property) {
         console.log(parent.jobs, property);
         parent.jobs[property].change(function () {
             var newVal = $(this).val();
-            var oldVal = game.jobs[property];
-            if (game.jobs[property] != newVal) {
-                if (newVal > oldVal + game.workerIdle) {
-                    console.log("New value [ ", newVal, " ] exceeds available [ ", oldVal + game.workerIdle, " ] workers");
+            var oldVal = g.jobs[property];
+            if (g.jobs[property] != newVal) {
+                if (newVal > oldVal + g.workerIdle) {
+                    console.log("New value [ ", newVal, " ] exceeds available [ ", oldVal + g.workerIdle, " ] workers");
                     $(this).val(oldVal);
                     return;
                 }
-                game.jobs[property] = newVal | 0;
-                game.workerIdle -= newVal - oldVal;
-                parent.setLabel(game, "workerIdle");
-                parent.setLaborControl(game, property);
+                g.jobs[property] = newVal | 0;
+                g.workerIdle -= newVal - oldVal;
+                parent.setLabel(g, "workerIdle");
+                parent.setLaborControl(g, property);
             }
-            save(game);
+            save(g);
         });
     };
 
@@ -141,9 +145,12 @@ function save(game) {
 
 function loadOrCreate() {
     var game = localStorage["game"];
-    if (game) return JSON.parse(game);
-    console.log(game);
-    return new Game();
+    if (game) {
+        return game = JSON.parse(game);
+    }
+    else {
+        return new Game();
+    }
 }
 
 function resetGame() {
@@ -156,8 +163,8 @@ function resetGame() {
         $(".navbar.navbar-fixed-bottom").show();
         $("#dialog_screen").hide();
         ui.hideWeekColumns();
+        init(true);
         $site.fadeIn();
-        init();
     });
 }
 
@@ -225,19 +232,29 @@ function nextSeason() {
         console.log(item, oldTotal, getStock(upkeep, item), getStock(yield_, item));
         stocks[item] = oldTotal - getStock(upkeep, item) + getStock(yield_, item);
     });
+    g.season = (g.season + 1) % 4;
     _.forEach(triggers, function (f) {
         f(g);
     });
     console.log('New Stock', g.stocks);
+    ui.seasonHeader.text(SEASONS[g.season]);
     updateStock(g, ui, yield_, upkeep);
     changeTab("stock");
 }
 
-function init() {
+function gameOver(game, cause) {
+    console.log("Game over");
+    $("#game").addClass("game-over");
+    $("#cause-of-death").text(cause);
+    $(".navbar.navbar-fixed-bottom").fadeOut();
+    $("#dialog_screen").fadeIn();
+}
+
+function init(reset) {
     console.log("Initializing game");
-    g = loadOrCreate();
-    var game = g;
-    if (ui == undefined) {
+    var game = loadOrCreate();
+    g = game;
+    if (!reset) {
         ui = new UI(game);
     }
     ui.setAllLabels(game);

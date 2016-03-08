@@ -5,10 +5,13 @@
 var triggers = {
     'gameOver': function (g) {
         if (g.stocks.food < 0) {
-            console.log("Game over");
-            $("#game").addClass("game-over");
-            $(".navbar.navbar-fixed-bottom").fadeOut();
-            $("#dialog_screen").fadeIn();
+            gameOver(g, "You starved to death.");
+        }
+    },
+    'raidOnSpring': function (game) {
+        console.log(SEASONS[game.season]);
+        if (SEASONS[game.season] == "spring") {
+            gameOver(game, "You got killed in a raid.");
         }
     }
 };
