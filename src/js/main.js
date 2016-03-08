@@ -3,8 +3,8 @@ var ui = undefined;
 const COLUMN_SIZING = "col-md-3";
 
 function Game() {
-    this.workerTotal = 5;
-    this.workerIdle = 5;
+    this.workerTotal = 20;
+    this.workerIdle = 20;
     this.jobs = {
         builder: 0,
         gatherer: 0,
@@ -60,7 +60,7 @@ function UI(game) {
     };
 
     this.hideWeekColumns = function () {
-        _.forEach(parent.stocks, function (obj, itemName) {
+        _.forEach(parent.stocks, function (obj) {
             obj.yield.css({"opacity": 0});
             obj.upkeep.css({"opacity": 0});
         });
@@ -68,7 +68,7 @@ function UI(game) {
     };
 
     this.showWeekColumns = function () {
-        _.forEach(parent.stocks, function (obj, itemName) {
+        _.forEach(parent.stocks, function (obj) {
             obj.yield.animate({"opacity": 1});
             obj.upkeep.animate({"opacity": 1});
         });
@@ -155,6 +155,7 @@ function resetGame() {
         $("#game").removeClass("game-over");
         $(".navbar.navbar-fixed-bottom").show();
         $("#dialog_screen").hide();
+        ui.hideWeekColumns();
         $site.fadeIn();
         init();
     });
