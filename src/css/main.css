@@ -69,7 +69,7 @@ div.navbar.navbar-fixed-bottom {
     z-index: 2;
 }
 
-#dialog_screen {
+.dialog-screen {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -84,10 +84,6 @@ div.navbar.navbar-fixed-bottom {
     text-align: center;
     color: brown;
     font-weight: bold;
-}
-
-#next {
-    display: none;
 }
 
 .btn-restart {
@@ -111,4 +107,32 @@ th {
 
 .season-header {
     text-transform: capitalize;
+}
+
+.dialog-bottom-panel {
+    height: 10em;
+    padding: 2em;
+}
+
+#next {
+    position:absolute;
+    right: 2em;
+    bottom: 1em;
+}
+
+#dialog-message {
+    font-weight: bold;
+}
+
+.char-name {
+    font-weight: bold;
+    font-size: x-large;
+    margin-top: -50px;
+    margin-bottom: 20px;
+}
+
+#character1 {
+    width: 18%;
+    height: 20%;
+    float:right;
 }

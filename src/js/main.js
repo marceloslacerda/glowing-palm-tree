@@ -60,6 +60,9 @@ function UI(game) {
         if (game.firstSeason) {
             this.hideWeekColumns();
         }
+        this.resetBar = $("#game > .navbar.navbar-fixed-bottom");
+        this.resetBar.hide();
+        $("#game-over-screen").hide();
     };
 
     this.hideWeekColumns = function () {
@@ -131,6 +134,17 @@ function UI(game) {
         });
     };
 
+    this.showEvent = function (game, event) {
+        $("#dialog-message").text(event);
+        this.resetBar.fadeOut();
+        $("#report-screen").fadeIn();
+    };
+
+    this.hideAllDialog = function () {
+        $(".dialog-screen").fadeOut();
+        this.resetBar.fadeIn();
+    };
+
     this.init();
 }
 
@@ -161,7 +175,7 @@ function resetGame() {
     $site.fadeOut(400, function () {
         $("#game").removeClass("game-over");
         $(".navbar.navbar-fixed-bottom").show();
-        $("#dialog_screen").hide();
+        $("#game-over-screen").hide();
         ui.hideWeekColumns();
         init(true);
         $site.fadeIn();
@@ -234,7 +248,7 @@ function nextSeason() {
     });
     g.season = (g.season + 1) % 4;
     _.forEach(triggers, function (f) {
-        f(g);
+        f(g, ui);
     });
     console.log('New Stock', g.stocks);
     ui.seasonHeader.text(SEASONS[g.season]);
@@ -247,7 +261,11 @@ function gameOver(game, cause) {
     $("#game").addClass("game-over");
     $("#cause-of-death").text(cause);
     $(".navbar.navbar-fixed-bottom").fadeOut();
-    $("#dialog_screen").fadeIn();
+    $("#game-over-screen").fadeIn();
+}
+
+function nextEvent() {
+    ui.hideAllDialog();
 }
 
 function init(reset) {

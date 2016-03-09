@@ -8,10 +8,14 @@ var triggers = {
             gameOver(g, "You starved to death.");
         }
     },
-    'raidOnSpring': function (game) {
+    'raidOnSpring': function (game, ui) {
         console.log(SEASONS[game.season]);
         if (SEASONS[game.season] == "spring") {
-            gameOver(game, "You got killed in a raid.");
+            if (game.jobs.guard < 3) {
+                gameOver(game, "You got killed in a raid.");
+            } else {
+                ui.showEvent(game, "You got raided by werewolves and survived.");
+            }
         }
     }
 };

@@ -84,20 +84,29 @@
             <button onclick="resetGame();" class="btn btn-danger reset-btn">Reset game</button>
         </div>
     </div>
-    <div id="dialog_screen">
+    <div id="game-over-screen" class="dialog-screen">
         <div class="text-center">
             <h1 class="game-over-text">GAME OVER</h1>
             <h2 id="cause-of-death">Your population died of famine!</h2>
             <button class="btn btn-success btn-restart" onclick="resetGame();">Try again</button>
         </div>
-        <div id="dialog_bottom_panel"></div>
-        <div id="character1"></div>
-        <div id="character2"></div>
-        <div id="character3"></div>
-        <div id="character4"></div>
-        <div id="character5"></div>
-        <div id="character6"></div>
-        <button id="next" class="btn btn-primary">&gt;&gt;&gt;</button>
+    </div>
+    <div id="report-screen" class="dialog-screen">
+        <div>
+            <img id="character1" src="img/assistant.svg"/>
+            <div id="character2"></div>
+            <div id="character3"></div>
+            <div id="character4"></div>
+            <div id="character5"></div>
+            <div id="character6"></div>
+            <div class="dialog-bottom-panel navbar navbar-fixed-bottom">
+                <div class="char-name">Assistant</div>
+                <div>
+                    <div id="dialog-message">This is a sample message.</div>
+                    <button id="next" class="btn btn-primary" onclick="nextEvent();">&gt;&gt;&gt;</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
