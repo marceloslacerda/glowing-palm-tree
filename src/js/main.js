@@ -291,6 +291,21 @@ function nextEvent() {
     }
 }
 
+function killWorkers(game, deaths) {
+    game.workerTotal -= deaths;
+    _.times(deaths, function() {
+        var remainder = game.workerIdle - deaths;
+        if(remainder < 0) {
+            //kill from jobs
+            var jobName = _.sample(_.keys(game.jobs));
+            game.jobs[jobName]--;
+        } else {
+            game.workerIdle -= deaths;
+        }
+    });
+    ui.setAllLabor(game);
+}
+
 function init(reset) {
     console.log("Initializing game");
     var game = loadOrCreate();
