@@ -26,6 +26,7 @@ function Game() {
     };
     this.firstSeason = true;
     this.season = 2;
+    this.gameOver = false;
 }
 
 function UI(game) {
@@ -38,6 +39,8 @@ function UI(game) {
     this.stocks = {};
     this.seasonHeader = $(".season-header");
     var parent = this;
+    this.events = [];
+    this.currentEvent = 0;
 
     this.init = function () {
         _.forEach(game.jobs, function (v, job) {
@@ -61,8 +64,7 @@ function UI(game) {
             this.hideWeekColumns();
         }
         this.resetBar = $("#game > .navbar.navbar-fixed-bottom");
-        this.resetBar.hide();
-        $("#game-over-screen").hide();
+        $(".dialog-screen").hide();
     };
 
     this.hideWeekColumns = function () {
@@ -134,8 +136,10 @@ function UI(game) {
         });
     };
 
-    this.showEvent = function (game, event) {
-        $("#dialog-message").text(event);
+    this.showEvents = function () {
+        console.log("New event message: ", this.events[this.currentEvent]);
+        $("#dialog-message").text(this.events[this.currentEvent]);
+        this.currentEvent++;
         this.resetBar.fadeOut();
         $("#report-screen").fadeIn();
     };
@@ -143,6 +147,14 @@ function UI(game) {
     this.hideAllDialog = function () {
         $(".dialog-screen").fadeOut();
         this.resetBar.fadeIn();
+    };
+
+    this.addGameEvent = function () {
+        var str = "";
+        _.forEach(arguments, function (v) {
+            str += v + " ";
+        });
+        this.events.push(str);
     };
 
     this.init();
@@ -250,10 +262,14 @@ function nextSeason() {
     _.forEach(triggers, function (f) {
         f(g, ui);
     });
+    if(g.gameOver) {
+        return;
+    }
     console.log('New Stock', g.stocks);
     ui.seasonHeader.text(SEASONS[g.season]);
     updateStock(g, ui, yield_, upkeep);
     changeTab("stock");
+    nextEvent();
 }
 
 function gameOver(game, cause) {
@@ -262,10 +278,17 @@ function gameOver(game, cause) {
     $("#cause-of-death").text(cause);
     $(".navbar.navbar-fixed-bottom").fadeOut();
     $("#game-over-screen").fadeIn();
+    game.gameOver = true;
 }
 
 function nextEvent() {
-    ui.hideAllDialog();
+    if (ui.currentEvent < ui.events.length) {
+        ui.showEvents();
+    } else {
+        ui.currentEvent = 0;
+        ui.events = [];
+        ui.hideAllDialog();
+    }
 }
 
 function init(reset) {

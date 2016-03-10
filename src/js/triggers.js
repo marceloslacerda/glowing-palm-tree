@@ -3,18 +3,25 @@
  */
 
 var triggers = {
-    'gameOver': function (g) {
-        if (g.stocks.food < 0) {
+    'foodEnd': function (g) {
+        var deadWorkers = -g.stocks.food;
+        if (deadWorkers <= 0) {
+            //Everybody's fed, nothing to report
+        } else if (deadWorkers >= g.workerTotal) {
             gameOver(g, "You starved to death.");
+        } else {
+            ui.addGameEvent(deadWorkers, "workers died because of starvation.");
         }
     },
     'raidOnSpring': function (game, ui) {
         console.log(SEASONS[game.season]);
         if (SEASONS[game.season] == "spring") {
-            if (game.jobs.guard < 3) {
+            var deadWorkers = 3 - g.jobs.guard;
+            if (deadWorkers <= 0) {
+            } else if (deadWorkers >= g.workerTotal) {
                 gameOver(game, "You got killed in a raid.");
             } else {
-                ui.showEvent(game, "You got raided by werewolves and survived.");
+                ui.addGameEvent("You got raided by werewolves and", deadWorkers, "workers died.");
             }
         }
     }
