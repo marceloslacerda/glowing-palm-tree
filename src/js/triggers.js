@@ -15,7 +15,6 @@ var triggers = {
         }
     },
     'raidOnSpring': function (game, ui) {
-        console.log(SEASONS[game.season]);
         if (SEASONS[game.season] == "spring") {
             var deadWorkers = 3 - g.jobs.guard;
             if (deadWorkers <= 0) {
@@ -26,6 +25,17 @@ var triggers = {
                 ui.addGameEvent("You got raided by werewolves and", deadWorkers, "workers died.");
                 killWorkers(g, deadWorkers);
             }
+        }
+    },
+    'immigrantsOnSummer': function (game, ui) {
+        if (SEASONS[game.season] == "summer") {
+            var immigrants = _.random(1, 3);
+            if (immigrants == 1) {
+                ui.addGameEvent("One immigrant have arrived!");
+            } else {
+                ui.addGameEvent(immigrants, "immigrants have arrived!");
+            }
+            immigrantsArrive(game, immigrants);
         }
     },
     'debugEvent': function (game) {

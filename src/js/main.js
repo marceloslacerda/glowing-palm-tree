@@ -309,6 +309,12 @@ function killWorkers(game, deaths) {
     ui.setAllLabels(game);
 }
 
+function immigrantsArrive(game, qty) {
+    game.workerTotal += qty;
+    game.workerIdle += qty;
+    ui.setAllLabels(game);
+}
+
 function init(reset) {
     console.log("Initializing game");
     var game = loadOrCreate();
