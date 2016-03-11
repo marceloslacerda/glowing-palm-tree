@@ -3,15 +3,31 @@
  */
 
 var triggers = {
-    'foodEnd': function (g) {
-        var deadWorkers = -g.stocks.food;
+    'foodEnd': function (game) {
+        var deadWorkers = -game.stocks.food;
         if (deadWorkers <= 0) {
             //Everybody's fed, nothing to report
-        } else if (deadWorkers >= g.workerTotal) {
-            gameOver(g, "You starved to death.");
+        } else if (deadWorkers >= game.workerTotal) {
+            gameOver(game, "You starved to death.");
         } else {
             ui.addGameEvent(deadWorkers, "workers died because of starvation.");
-            killWorkers(g, deadWorkers);
+            killWorkers(game, deadWorkers);
+        }
+    },
+    'woodEnd': function (game) {
+        if (SEASONS[game.season] == "winter") {
+            var deadWorkers = _.ceil(-game.stocks.wood / 5);
+            if (deadWorkers <= 0) {
+                // Enough fuel for everybody
+            } else {
+                if (deadWorkers >= game.workerTotal) {
+                    gameOver(game, "You the cold winter killed you.");
+                } else {
+                    ui.addGameEvent("The relentless winter reaped", deadWorkers, "lives this year. Having enough firewood for everybody could have prevented this.");
+                    killWorkers(game, deadWorkers);
+                }
+                game.stocks.wood = 0;
+            }
         }
     },
     'raidOnSpring': function (game, ui) {

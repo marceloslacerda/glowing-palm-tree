@@ -17,12 +17,12 @@ function Game() {
     this.stocks = {
         herb: 3,
         food: 5,
-        stone: 2,
+        stone: 0,
         iron: 0,
         coal: 0,
         leather: 0,
         steel: 0,
-        wood: 5
+        wood: 0
     };
     this.firstSeason = true;
     this.season = 2;
