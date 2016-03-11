@@ -26,7 +26,6 @@ var triggers = {
                     ui.addGameEvent("The relentless winter reaped", deadWorkers, "lives this year. Having enough firewood for everybody could have prevented this.");
                     killWorkers(game, deadWorkers);
                 }
-                game.stocks.wood = 0;
             }
         }
     },
