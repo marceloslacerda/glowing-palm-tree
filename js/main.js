@@ -313,6 +313,7 @@ function immigrantsArrive(game, qty) {
     game.workerTotal += qty;
     game.workerIdle += qty;
     ui.setAllLabels(game);
+    ui.setAllLabor(game);
 }
 
 function init(reset) {
