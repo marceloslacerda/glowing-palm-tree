@@ -217,6 +217,10 @@ function calcUpkeep(game) {
 function updateStock(game, ui, yield_, upkeep) {
     function setItems(type, list) {
         _.forEach(list, function (quantity, item) {
+            if (quantity < 0) {
+                quantity = 0;
+                game.stocks[item] = 0;
+            }
             ui.stocks[item][type].text(quantity.toFixed(2));
         });
     }
