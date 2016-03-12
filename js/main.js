@@ -207,11 +207,9 @@ function changeTab(tabId) {
 }
 
 function calcUpkeep(game) {
-    return {
-        'food': game.workerTotal,
-        'herb': game.workerTotal / 5,
-        'wood': game.workerTotal / 5
-    }
+    return _.mapValues(upkeep.workerTotal, function (ratio) {
+        return ratio * game.workerTotal
+    });
 }
 
 function updateStock(game, ui, yield_, upkeep) {

@@ -2,48 +2,61 @@
  * Created by msl09 on 3/1/16.
  */
 
+function deadFromStock(game, item) {
+    return _.ceil(-game.stocks[item] * upkeep.workerTotal[item]);
+}
+
+function basicDeathTrigger(game, deadWorkers, gameOverMessage, workerDeathMessage, successMessage) {
+    if (deadWorkers <= 0) {
+        if (successMessage) {
+            ui.addGameEvent(successMessage);
+        }
+    } else if (deadWorkers >= game.workerTotal) {
+        gameOver(game, gameOverMessage);
+    } else {
+        var msg = _.replace(workerDeathMessage, '{}', deadWorkers);
+        if (deadWorkers == 1) {
+            msg = _.replace(msg, 'workers', 'worker');
+        }
+        ui.addGameEvent(msg);
+        killWorkers(game, deadWorkers);
+    }
+}
+
+function isSeason(game, season) {
+    return SEASONS[game.season] == season;
+}
+
 var triggers = {
     'foodEnd': function (game) {
-        var deadWorkers = -game.stocks.food;
-        if (deadWorkers <= 0) {
-            //Everybody's fed, nothing to report
-        } else if (deadWorkers >= game.workerTotal) {
-            gameOver(game, "You starved to death.");
-        } else {
-            ui.addGameEvent(deadWorkers, "workers died because of starvation.");
-            killWorkers(game, deadWorkers);
-        }
+        var deadWorkers = deadFromStock(game, "food");
+        basicDeathTrigger(game, deadWorkers, "You starved to death", "{} workers died due to famine.");
     },
     'woodEnd': function (game) {
-        if (SEASONS[game.season] == "winter") {
-            var deadWorkers = _.ceil(-game.stocks.wood / 5);
-            if (deadWorkers <= 0) {
-                // Enough fuel for everybody
-            } else {
-                if (deadWorkers >= game.workerTotal) {
-                    gameOver(game, "You the cold winter killed you.");
-                } else {
-                    ui.addGameEvent("The relentless winter reaped", deadWorkers, "lives this year. Having enough firewood for everybody could have prevented this.");
-                    killWorkers(game, deadWorkers);
-                }
-            }
+        if (isSeason("winter")) {
+            var deadWorkers = deadFromStock(game, "wood");
+            basicDeathTrigger(game, deadWorkers, "The cold winter killed you.", "The relentless winter\
+                reaped {} lives this year. Having enough firewood for everybody could have prevented this.");
         }
     },
-    'raidOnSpring': function (game, ui) {
-        if (SEASONS[game.season] == "spring") {
+    'herbEnd': function (game) {
+        if (isSeason("spring") || isSeason("autumn")) {
+            var deadWorkers = deadFromStock(game, "herb");
+            basicDeathTrigger(game, deadWorkers, "The sudden change in temperature got {} workers sick.\
+                Without herbs for medicine death followed.");
+        }
+    },
+    'raidOnSpring': function (game) {
+        if (isSeason("spring")) {
             var deadWorkers = 3 - g.jobs.guard;
-            if (deadWorkers <= 0) {
-                ui.addGameEvent("Your guards were able to repel a pathetic raid from the werewolves!");
-            } else if (deadWorkers >= g.workerTotal) {
-                gameOver(game, "You got killed in a raid.");
-            } else {
-                ui.addGameEvent("You got raided by werewolves and", deadWorkers, "workers died.");
-                killWorkers(g, deadWorkers);
-            }
+            basicDeathTrigger(game, deadWorkers,
+                "You got killed in a raid.",
+                "You got raided by werewolves and {} workers died.",
+                "Your guards were able to repel a pathetic raid from the werewolves!");
         }
     },
     'immigrantsOnSummer': function (game, ui) {
-        if (SEASONS[game.season] == "summer") {
+        if (isSeason("summer")) {
             var immigrants = _.random(1, 3);
             if (immigrants == 1) {
                 ui.addGameEvent("One immigrant have arrived!");
