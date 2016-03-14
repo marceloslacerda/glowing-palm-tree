@@ -9,7 +9,6 @@ function Game() {
     this.jobs = {
         builder: 0,
         gatherer: 0,
-        scientist: 0,
         guard: 0,
         lumberjack: 0,
         miner: 0
@@ -18,10 +17,6 @@ function Game() {
         herb: 3,
         food: 5,
         stone: 0,
-        iron: 0,
-        coal: 0,
-        leather: 0,
-        steel: 0,
         wood: 0
     };
     this.firstSeason = true;
@@ -43,12 +38,8 @@ function UI(game) {
     this.currentEvent = 0;
 
     this.init = function () {
-        _.forEach(game.jobs, function (v, job) {
-            console.log(job);
-            parent.jobs[job] = $("#" + job + " * input");
-            parent.setLaborChangeEvent(job);
-        });
 
+        // Populate the stock table
         _.forEach(game.stocks, function (v, item) {
             var stockTable = $("#stock");
             var tr = $("<tr>").addClass("row");
@@ -60,11 +51,53 @@ function UI(game) {
             tr.append(head).append(value).append(yield_).append(upkeep);
             parent.stocks[item] = {"value": value, "yield": yield_, "upkeep": upkeep};
         });
+
+        // Populate the labor table
+        _.forEach(game.jobs, function (v, job) {
+            var stockTable = $("#population");
+            var tr = $("<div>").addClass("row");
+            var head = $("<label>")
+                .addClass(COLUMN_SIZING + " job-name")
+                .text(job)
+                .attr("for", "job-" + job);
+            var value = $("<input type='number' value='0' min='0'>")
+                .addClass(COLUMN_SIZING)
+                .text(0)
+                .attr("id", "job-" + job);
+            var yieldColumn = $("<div>").addClass(COLUMN_SIZING + " yield");
+            var yieldButton = $("<button>").addClass("col-md-3 btn btn-link")
+                .attr({
+                    "data-toggle": "popover",
+                    "title":"Expected Production",
+                    "data-content":"Food: 10.00, Herb 4.00, Wood: 4.00",
+                    "data-placement":"bottom"
+                }).html("&#x1F4C8");
+            var upkeepColumn = $("<div>").addClass(COLUMN_SIZING + " upkeep");
+            var upkeepButton = $("<button>").addClass("btn btn-link")
+                .attr({
+                    "data-toggle": "popover",
+                    "title":"Expected Consumption",
+                    "data-content":"Food: 10.00, Herb 4.00, Wood: 4.00",
+                    "data-placement":"bottom"
+                }).html("&#x1F4C9");
+            if(_.includes(_.keys(laborYield), job)) {
+                yieldColumn.append(yieldButton);
+            }
+            if(_.includes(_.keys(upkeep), job)){
+                upkeepColumn.append(upkeepButton);
+            }
+            stockTable.append(tr);
+            tr.append(head).append(value).append(yieldColumn).append(upkeepColumn);
+            parent.jobs[job] = {"control": value, "yield": yieldButton, "upkeep": upkeepButton};
+            parent.setLaborChangeEvent(job);
+        });
+
         if (game.firstSeason) {
             this.hideWeekColumns();
         }
         this.resetBar = $("#game > .navbar.navbar-fixed-bottom");
         $(".dialog-screen").hide();
+        $('[data-toggle="popover"]').popover()
     };
 
     this.hideWeekColumns = function () {
@@ -98,15 +131,15 @@ function UI(game) {
     };
 
     this.setMaxValueLabor = function (game) {
-        _.forEach(parent.jobs, function (v, k) {
-            v.attr("max", game.workerIdle + game.jobs[k]);
+        _.forEach(parent.jobs, function (obj, jobName) {
+            obj.control.attr("max", game.workerIdle + game.jobs[jobName]);
         });
     };
 
     this.setLaborControl = function (game, property) {
         var value = game.jobs[property];
         console.log("Setting control: [", property, "] with value: [", value, "]");
-        parent.jobs[property].val(value);
+        parent.jobs[property].control.val(value);
         this.setMaxValueLabor(game, parent);
     };
 
@@ -118,7 +151,7 @@ function UI(game) {
 
     this.setLaborChangeEvent = function (property) {
         console.log(parent.jobs, property);
-        parent.jobs[property].change(function () {
+        parent.jobs[property].control.change(function () {
             var newVal = $(this).val();
             var oldVal = g.jobs[property];
             if (g.jobs[property] != newVal) {

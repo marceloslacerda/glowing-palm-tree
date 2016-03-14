@@ -44,41 +44,28 @@
             </table>
             <div id="population" class="item" style="display: none">
                 <h3 id="race-name">Buffalo</h3>
-                <table id="labor" class="table">
-                    <caption class="sighted-invisible">Labor allocation</caption>
-                    <tr id="workerTotal" class="row">
-                        <th scope="row" class="col-md-3">Total Number of workers:</th>
-                        <td class="col-md-9">20</td>
-                    </tr>
-                    <tr id="workerIdle" class="row">
-                        <th scope="row" class="col-md-3">Idle workers:</th>
-                        <td class="col-md-9">20</td>
-                    </tr>
-                    <tr id="builder" class="row">
-                        <th scope="row" class="col-md-3"><label for="lb">Builders:</label></th>
-                        <td class="col-md-9"><input id="lb" type="number" value="0" min="0"></td>
-                    </tr>
-                    <tr id="gatherer" class="row">
-                        <th scope="row" class="col-md-3"><label for="lg">Hunter/Gatherers:</label></th>
-                        <td class="col-md-9"><input id="lg" type="number" value="0" min="0"></td>
-                    </tr>
-                    <tr id="lumberjack" class="row">
-                        <th scope="row" class="col-md-3"><label for="lh">Lumberjacks:</label></th>
-                        <td class="col-md-9"><input id="lh" type="number" value="0" min="0"></td>
-                    </tr>
-                    <tr id="scientist" class="row">
-                        <th scope="row" class="col-md-3"><label for="ls">Scientists:</label></th>
-                        <td class="col-md-9"><input id="ls" type="number" value="0" min="0"></td>
-                    </tr>
-                    <tr id="miner" class="row">
-                        <th scope="row" class="col-md-3"><label for="lm">Miners:</label></th>
-                        <td class="col-md-9"><input id="lm" type="number" value="0" min="0"></td>
-                    </tr>
-                    <tr id="guard" class="row">
-                        <th scope="row" class="col-md-3"><label for="lgu">Guards:</label></th>
-                        <td class="col-md-9"><input id="lgu" type="number" value="0" min="0"></td>
-                    </tr>
-                </table>
+                <div id="labor">
+                    <div class="row">
+                        <span class="col-md-6"></span>
+                        <strong class="col-md-3">Yield</strong>
+                        <strong class="col-md-3">Upkeep</strong>
+                    </div>
+                    <div id="workerTotal" class="row">
+                        <strong class="col-md-3">Total number of workers</strong>
+                        <span class="col-md-3">20</span>
+                        <span class="col-md-3 yield"></span>
+                        <div class="col-md-3 upkeep">
+                            <button class="col-md-3 btn btn-link"  data-toggle="popover" title="Expected Consumption"
+                                    data-content="Food: 10.00, Herb 4.00, Wood: 4.00" data-placement="bottom">
+                                &#x1F4C9
+                            </button>
+                        </div>
+                    </div>
+                    <div id="workerIdle" class="row">
+                        <strong class="col-md-3">Idle workers:</strong>
+                        <span class="col-md-9">20</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="navbar navbar-fixed-bottom">

@@ -136,3 +136,25 @@ th {
     height: 20%;
     float:right;
 }
+
+label {
+    text-transform: capitalize;
+}
+
+div.row {
+    margin-bottom: 0.5em;
+}
+
+.food-item {
+    color: #7f2b3f;
+}
+
+.wood-item {
+    color: #7f5032;
+}
+.herb-item {
+    color: #1fd801
+}
+.stone-item {
+    color: #8e937b
+}
