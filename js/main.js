@@ -39,6 +39,12 @@ function UI(game) {
 
     this.init = function () {
 
+        function costYieldString(obj, job) {
+            return _.map(obj[job], function (quantity, item) {
+                return item + ": " + quantity;
+            }).join(", ");
+        }
+
         // Populate the stock table
         _.forEach(game.stocks, function (v, item) {
             var stockTable = $("#stock");
@@ -64,31 +70,14 @@ function UI(game) {
                 .addClass(COLUMN_SIZING)
                 .text(0)
                 .attr("id", "job-" + job);
-            var yieldColumn = $("<div>").addClass(COLUMN_SIZING + " yield");
-            var yieldButton = $("<button>").addClass("col-md-3 btn btn-link")
-                .attr({
-                    "data-toggle": "popover",
-                    "title":"Expected Production",
-                    "data-content":"Food: 10.00, Herb 4.00, Wood: 4.00",
-                    "data-placement":"bottom"
-                }).html("&#x1F4C8");
-            var upkeepColumn = $("<div>").addClass(COLUMN_SIZING + " upkeep");
-            var upkeepButton = $("<button>").addClass("btn btn-link")
-                .attr({
-                    "data-toggle": "popover",
-                    "title":"Expected Consumption",
-                    "data-content":"Food: 10.00, Herb 4.00, Wood: 4.00",
-                    "data-placement":"bottom"
-                }).html("&#x1F4C9");
-            if(_.includes(_.keys(laborYield), job)) {
-                yieldColumn.append(yieldButton);
-            }
-            if(_.includes(_.keys(upkeep), job)){
-                upkeepColumn.append(upkeepButton);
-            }
+            var yieldColumn = $("<div>").addClass(COLUMN_SIZING + " yield")
+                .text(costYieldString(laborYield, job));
+            var upkeepColumn = $("<div>").addClass(COLUMN_SIZING + " upkeep")
+                .text(costYieldString(upkeep, job));
+
             stockTable.append(tr);
             tr.append(head).append(value).append(yieldColumn).append(upkeepColumn);
-            parent.jobs[job] = {"control": value, "yield": yieldButton, "upkeep": upkeepButton};
+            parent.jobs[job] = {"control": value};
             parent.setLaborChangeEvent(job);
         });
 

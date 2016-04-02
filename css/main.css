@@ -99,10 +99,12 @@ th {
 
 .yield {
     color: green;
+    text-transform: capitalize;
 }
 
 .upkeep {
     color: red;
+    text-transform: capitalize;
 }
 
 .season-header {
