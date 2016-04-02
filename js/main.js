@@ -86,9 +86,16 @@ function UI(game) {
         }
         this.resetBar = $("#reset-bar").hide().toggleClass("hidden");
         $(".dialog-screen").hide();
+
+        //loading screen display
         window.setTimeout(function () {
-            $("#loading-screen").fadeOut();
-        }, 3000);
+            $("#loading-screen").fadeOut(function () {
+                if (g.turnNumber > 0) {
+                    parent.resetBar.fadeIn();
+                }
+            });
+
+        }, 1000);
 
         $('[data-toggle="popover"]').popover()
     };
@@ -289,7 +296,7 @@ function nextSeason() {
     _.forEach(triggers, function (f) {
         f(g, ui);
     });
-    if(g.gameOver) {
+    if (g.gameOver) {
         return;
     }
     console.log('New Stock', g.stocks);
@@ -325,9 +332,9 @@ function nextEvent() {
 
 function killWorkers(game, deaths) {
     game.workerTotal -= deaths;
-    _.times(deaths, function() {
+    _.times(deaths, function () {
         var remainder = game.workerIdle - 1;
-        if(remainder < 0) {
+        if (remainder < 0) {
             //kill from jobs
             var jobName = _.sample(_.filter(_.keys(game.jobs), function (k) {
                 return game.jobs[k] > 0;

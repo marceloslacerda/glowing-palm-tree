@@ -208,3 +208,11 @@ img {
     z-index: 4;
     background-color: rgba(255, 255, 255, 1);
 }
+
+.credits {
+    display: inline-block;
+}
+
+#reset-bar {
+    vertical-align: bottom;
+}
