@@ -33,21 +33,21 @@ var triggers = {
         basicDeathTrigger(game, deadWorkers, "You starved to death", "{} workers died due to famine.");
     },
     'woodEnd': function (game) {
-        if (isSeason("winter")) {
+        if (isSeason(game, "winter")) {
             var deadWorkers = deadFromStock(game, "wood");
             basicDeathTrigger(game, deadWorkers, "The cold winter killed you.", "The relentless winter\
                 reaped {} lives this year. Having enough firewood for everybody could have prevented this.");
         }
     },
     'herbEnd': function (game) {
-        if (isSeason("spring") || isSeason("autumn")) {
+        if (isSeason(game, "spring") || isSeason(game, "autumn")) {
             var deadWorkers = deadFromStock(game, "herb");
             basicDeathTrigger(game, deadWorkers, "The sudden change in temperature got {} workers sick.\
                 Without herbs for medicine death followed.");
         }
     },
     'raidOnSpring': function (game) {
-        if (isSeason("spring")) {
+        if (isSeason(game, "spring")) {
             var deadWorkers = 3 - g.jobs.guard;
             basicDeathTrigger(game, deadWorkers,
                 "You got killed in a raid.",
@@ -56,7 +56,7 @@ var triggers = {
         }
     },
     'immigrantsOnSummer': function (game, ui) {
-        if (isSeason("summer")) {
+        if (isSeason(game, "summer")) {
             var immigrants = _.random(1, 3);
             if (immigrants == 1) {
                 ui.addGameEvent("One immigrant have arrived!");
