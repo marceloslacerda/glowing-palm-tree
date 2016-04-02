@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-        <div class="navbar navbar-fixed-bottom">
+        <div id="reset-bar" class="navbar navbar-fixed-bottom hidden">
             <button onclick="resetGame();" class="btn btn-danger reset-btn">Reset game</button>
         </div>
     </div>
@@ -90,6 +90,16 @@
                     <div id="dialog-message">This is a sample message.</div>
                     <button id="next" class="btn btn-primary" onclick="nextEvent();">&gt;&gt;&gt;</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div id="loading-screen">
+        <div class="vertical-center text-center">
+            <div class="column-direction">
+                <h1 class="loading-text">Please wait while the game is loading</h1>
+                <!--<img draggable="false" src="img/ajax-loader.gif">-->
+                <div class="loading-symbol"></div>
+                <h2>Built with ♥ by <a href="https://podricing.pw/u/new_feh" target="_newtab">Feh</a></h2>
             </div>
         </div>
     </div>

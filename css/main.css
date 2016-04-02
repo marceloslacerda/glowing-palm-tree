@@ -160,3 +160,51 @@ div.row {
 .stone-item {
     color: #8e937b
 }
+
+.hidden-start {
+    display: none;
+}
+
+.vertical-center {
+    min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+
+    display: flex;
+    align-items: center;
+}
+
+.column-direction {
+    min-width: 100%; /* These two lines are counted as one :-)       */
+    flex-direction: column;
+}
+
+.loading-text {
+    font-weight: bold;
+}
+
+.loading-symbol {
+    background-image: url("../img/ajax-loader.gif");
+    width: 16px;
+    height: 16px;
+    margin-left: 50%;
+
+}
+
+img {
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#loading-screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    background-color: rgba(255, 255, 255, 1);
+}

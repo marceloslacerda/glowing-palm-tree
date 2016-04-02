@@ -84,8 +84,14 @@ function UI(game) {
         if (game.firstSeason) {
             this.hideWeekColumns();
         }
-        this.resetBar = $("#game > .navbar.navbar-fixed-bottom");
+        this.resetBar = $("#reset-bar");
         $(".dialog-screen").hide();
+        window.setTimeout(function () {
+            $("#loading-screen").fadeOut(function () {
+                parent.resetBar.fadeIn();
+            });
+        }, 3000);
+
         $('[data-toggle="popover"]').popover()
     };
 
