@@ -8,9 +8,7 @@ var laborYield = {
         'herb': 0.5
     },
     'miner': {
-        'stone': 1,
-        'iron': 0.1,
-        'coal': 0.2
+        'stone': 1
     },
     'lumberjack': {
         'wood': 3
