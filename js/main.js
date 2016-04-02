@@ -19,7 +19,7 @@ function Game() {
         stone: 0,
         wood: 0
     };
-    this.firstSeason = true;
+    this.turnNumber = 0;
     this.season = 2;
     this.gameOver = false;
 }
@@ -81,15 +81,13 @@ function UI(game) {
             parent.setLaborChangeEvent(job);
         });
 
-        if (game.firstSeason) {
+        if (game.turnNumber == 0) {
             this.hideWeekColumns();
         }
-        this.resetBar = $("#reset-bar");
+        this.resetBar = $("#reset-bar").hide().toggleClass("hidden");
         $(".dialog-screen").hide();
         window.setTimeout(function () {
-            $("#loading-screen").fadeOut(function () {
-                parent.resetBar.fadeIn();
-            });
+            $("#loading-screen").fadeOut();
         }, 3000);
 
         $('[data-toggle="popover"]').popover()
@@ -109,7 +107,6 @@ function UI(game) {
             obj.upkeep.animate({"opacity": 1});
         });
         $("#stock>thead>tr>th").animate({"opacity": 1});
-        game.firstSeason = false;
     };
 
     this.setAllLabels = function (game) {
@@ -271,7 +268,7 @@ function calcYield(game) {
 }
 
 function nextSeason() {
-    if (g.firstSeason) {
+    if (g.turnNumber == 0) {
         ui.showWeekColumns();
     }
     console.log("Another season.");
@@ -300,6 +297,7 @@ function nextSeason() {
     updateStock(g, ui, yield_, upkeep);
     changeTab("stock");
     nextEvent();
+    g.turnNumber++;
 }
 
 function gameOver(game, cause) {
@@ -317,7 +315,11 @@ function nextEvent() {
     } else {
         ui.currentEvent = 0;
         ui.events = [];
-        ui.hideAllDialog();
+        ui.hideAllDialog(function () {
+            if (g.turnNumber == 0) {
+                parent.resetBar.fadeIn();
+            }
+        });
     }
 }
 
