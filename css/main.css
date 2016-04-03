@@ -117,7 +117,7 @@ th {
 }
 
 #next {
-    position:absolute;
+    position: absolute;
     right: 2em;
     bottom: 1em;
 }
@@ -136,7 +136,7 @@ th {
 #character1 {
     width: 18%;
     height: 20%;
-    float:right;
+    float: right;
 }
 
 label {
@@ -154,9 +154,11 @@ div.row {
 .wood-item {
     color: #7f5032;
 }
+
 .herb-item {
     color: #1fd801
 }
+
 .stone-item {
     color: #8e937b
 }
@@ -215,4 +217,13 @@ img {
 
 #reset-bar {
     vertical-align: bottom;
+}
+
+.click-to-continue {
+    color: white;
+    font-weight: bold;
+    bottom: 0.5em;
+    vertical-align: bottom;
+    position: absolute;
+    right: 0.5em;
 }
