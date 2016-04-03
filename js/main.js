@@ -93,6 +93,7 @@ function UI(game) {
                 if (g.turnNumber > 0) {
                     parent.resetBar.fadeIn();
                 }
+                $(".credits").append($("#credits"));
             });
 
         }, 1000);
