@@ -67,6 +67,10 @@ div.navbar.navbar-fixed-bottom {
 
 #game {
     z-index: 2;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 2%;
+    padding: 2em;
+    margin-top: 10px;
 }
 
 .dialog-screen {
@@ -226,4 +230,12 @@ img {
     vertical-align: bottom;
     position: absolute;
     right: 0.5em;
+}
+
+.building-size {
+    margin-right: 1em;
+}
+
+.site-wrapper {
+    background-image: url("../img/fortress_gate.jpg");
 }

@@ -27,7 +27,9 @@
                 </button>
                 <button class="col-md-3 btn btn-default" onclick="changeTab('population');" id="btn-population">Labor
                 </button>
-                <div class="col-md-6"></div>
+                <button class="col-md-3 btn btn-default" onclick="changeTab('building');" id="btn-building">Buildings
+                </button>
+                <div class="col-md-3"></div>
             </div>
             <button class="btn-primary btn top-btn" onclick="nextSeason();">Next season</button>
             <table class="table" id="stock">
@@ -40,7 +42,6 @@
                     <th scope="row" class="col-md-3">Previous upkeep</th>
                 </tr>
                 </thead>
-
             </table>
             <div id="population" class="item" style="display: none">
                 <h3 id="race-name">Buffalo</h3>
@@ -63,6 +64,48 @@
                         <span class="col-md-9">20</span>
                     </div>
                 </div>
+            </div>
+            <div id="building" class="item" style="display: none">
+                <table class="table" id="building-table">
+                <caption class="sighted-invisible">Buildings listing</caption>
+                <thead>
+                <tr class="row">
+                    <th class="col-md-3"></th>
+                    <th scope="row" class="col-md-3">Capacity</th>
+                    <th scope="row" class="col-md-3">Designated area</th>
+                    <th scope="row" class="col-md-3">Size/Unit</th>
+                </tr>
+                <tr class="row">
+                    <th class="col-md-3">Unassigned terrain</th>
+                    <td scope="row" class="col-md-3"></td>
+                    <td scope="row" class="col-md-3">
+                        <span id="unassigned-size">1000</span>
+                    </td>
+                    <td scope="row" class="col-md-3">
+                    </td>
+                </tr>
+                <tr class="row">
+                    <th class="col-md-3">Unmanaged woodland</th>
+                    <td scope="row" class="col-md-3"><label><input type="number" style="width:8em" value="5">units</label></td>
+                    <td scope="row" class="col-md-3">
+                        <span id="unmanaged-forest-size">500</span>
+                    </td>
+                    <td scope="row" class="col-md-3">
+                        100
+                    </td>
+                </tr>
+                <tr class="row">
+                    <th class="col-md-3">Rundown fortress</th>
+                    <td scope="row" class="col-md-3"><label><input type="number" style="width:8em" value="2">units</label></td>
+                    <td scope="row" class="col-md-3">
+                        <span id="fortress-size">20</span>
+                    </td>
+                    <td scope="row" class="col-md-3">
+                        10
+                    </td>
+                </tr>
+                </thead>
+            </table>
             </div>
         </div>
         <div id="reset-bar" class="navbar navbar-fixed-bottom hidden text-center">
