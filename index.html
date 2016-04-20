@@ -67,45 +67,104 @@
             </div>
             <div id="building" class="item" style="display: none">
                 <table class="table" id="building-table">
-                <caption class="sighted-invisible">Buildings listing</caption>
-                <thead>
-                <tr class="row">
-                    <th class="col-md-3"></th>
-                    <th scope="row" class="col-md-3">Capacity</th>
-                    <th scope="row" class="col-md-3">Designated area</th>
-                    <th scope="row" class="col-md-3">Size/Unit</th>
-                </tr>
-                <tr class="row">
-                    <th class="col-md-3">Unassigned terrain</th>
-                    <td scope="row" class="col-md-3"></td>
-                    <td scope="row" class="col-md-3">
-                        <span id="unassigned-size">1000</span>
-                    </td>
-                    <td scope="row" class="col-md-3">
-                    </td>
-                </tr>
-                <tr class="row">
-                    <th class="col-md-3">Unmanaged woodland</th>
-                    <td scope="row" class="col-md-3"><label><input type="number" style="width:8em" value="5">units</label></td>
-                    <td scope="row" class="col-md-3">
-                        <span id="unmanaged-forest-size">500</span>
-                    </td>
-                    <td scope="row" class="col-md-3">
-                        100
-                    </td>
-                </tr>
-                <tr class="row">
-                    <th class="col-md-3">Rundown fortress</th>
-                    <td scope="row" class="col-md-3"><label><input type="number" style="width:8em" value="2">units</label></td>
-                    <td scope="row" class="col-md-3">
-                        <span id="fortress-size">20</span>
-                    </td>
-                    <td scope="row" class="col-md-3">
-                        10
-                    </td>
-                </tr>
-                </thead>
-            </table>
+                    <caption class="sighted-invisible">Buildings listing</caption>
+                    <thead>
+                    <tr class="row">
+                        <th class="col-md-3"></th>
+                        <th scope="row" class="col-md-3">Capacity</th>
+                        <th scope="row" class="col-md-3">Designated area</th>
+                        <th scope="row" class="col-md-3"></th>
+                    </tr>
+                    <tr class="row">
+                        <th class="col-md-3">Unassigned terrain</th>
+                        <td scope="row" class="col-md-3"></td>
+                        <td scope="row" class="col-md-3">
+                            <span id="unassigned-size">1000</span>
+                        </td>
+                        <td scope="row" class="col-md-3">
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <th class="col-md-3">Unmanaged woodland</th>
+                        <td scope="row" class="col-md-3">5</td>
+                        <td scope="row" class="col-md-3">
+                            <span id="unmanaged-forest-size">500</span>
+                        </td>
+                        <td scope="row" class="col-md-3">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                    data-target="#myModal">
+                                Details
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Resize woodland</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                Unmanaged woodland is the terrain of wilderness.
+                                                <b>Lumberjacks</b> and <b>Gatherers</b> can be allocated to it.
+                                            </p>
+                                            <table class="table center-block">
+                                                <caption class="caption">Stock items necessary</caption>
+                                                <tr class="row">
+                                                    <th></th>
+                                                    <th>Available</th>
+                                                    <th>Needed</th>
+                                                </tr>
+                                                <tr class="row">
+                                                    <th>Wood</th>
+                                                    <th>5</th>
+                                                    <th>10</th>
+                                                </tr>
+                                                <tr class="row">
+                                                    <th>Stone</th>
+                                                    <th>10</th>
+                                                    <th>1</th>
+                                                </tr>
+                                            </table>
+                                            <ul>
+                                                <li>Available terrain: 500</li>
+                                                <li>Size: 100</li>
+                                                <li>Capacity:
+                                                    <label>
+                                                        <input type="number" style="width:8em" value="5">
+                                                        units
+                                                    </label>
+                                                </li>
+                                                <li>Yield per unit allocated: Wood 1 Food 2</li>
+                                            </ul>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                            </button>
+                                            <button type="button" class="btn btn-primary">Grow</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <th class="col-md-3">Rundown fortress</th>
+                        <td scope="row" class="col-md-3"><label><input type="number" style="width:8em"
+                                                                       value="2">units</label></td>
+                        <td scope="row" class="col-md-3">
+                            <span id="fortress-size">20</span>
+                        </td>
+                        <td scope="row" class="col-md-3">
+                            10
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
             </div>
         </div>
         <div id="reset-bar" class="navbar navbar-fixed-bottom hidden text-center">
